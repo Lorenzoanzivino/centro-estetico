@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Aura Boutique Spa & Centro Estetico Avanzato - Trattamenti viso e corpo personalizzati, percorsi benessere e cosmeceutica naturale d'avanguardia. Prenota la tua consulenza.">
+  <meta name="theme-color" content="#F7EFEA">
+  
+  <!-- Favicon SVG con monogramma raffinato -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23F7EFEA' stroke='%23C26747' stroke-width='4'/><text x='50%' y='58%' font-family='serif' font-size='42' fill='%23344636' font-weight='bold' text-anchor='middle' dominant-baseline='middle'>A</text></svg>">
+
+  <title>Aura | Boutique Spa & Centro Estetico Avanzato</title>
+
+  <!-- Google Fonts: Cormorant Garamond (Serif luxury) + Plus Jakarta Sans (Sans-serif moderno) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS via CDN con estensione della palette 60-30-10 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cipria: {
+              DEFAULT: '#F7EFEA', /* 60% Colore Base */
+              50: '#FDFBF9',
+              100: '#FAF4F0',
+              200: '#F7EFEA',
+              300: '#EFE3DC',
+              400: '#E5D4CB',
+            },
+            bosco: {
+              DEFAULT: '#344636', /* 30% Colore Secondario */
+              dark: '#273629',
+              light: '#4E6151',
+              muted: '#5E7261',
+              border: '#CBD8CC',
+              tint: '#EBF1EC',
+            },
+            terracotta: {
+              DEFAULT: '#C26747', /* 10% Colore Accento */
+              hover: '#A85437',
+              dark: '#8E4229',
+              tint: '#F9ECE7',
+            }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Stile Personalizzato e Safe Area -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-[#F7EFEA] text-[#273629] antialiased selection:bg-[#C26747]/20 selection:text-[#273629] relative">
+
+  <!-- ========================================================================
+       1. NAVBAR (FISSA, RESPONSIVE, MOBILE-FIRST CON SAFE AREA)
+       Link rapidi: Home (#hero), Offerte (#offerte), Trattamenti (#trattamenti), Orari (#orari)
+       Pulsante finale: "Prenota / Contatta" (collegato a WhatsApp)
+       ======================================================================== -->
+  <header id="main-header" class="fixed top-0 left-0 right-0 z-40 bg-[#F7EFEA]/85 backdrop-blur-md border-b border-[#E8DDD7] transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Sinistra: Brand Logo / Nome del centro -->
+        <a href="#hero" class="flex flex-col group py-1" aria-label="Aura Centro Estetico - Torna alla Home">
+          <span class="nav-brand-name font-serif text-2xl sm:text-3xl font-semibold tracking-wider text-[#273629] group-hover:text-[#C26747] transition-colors">
+            Aura
+          </span>
+          <span class="nav-brand-tagline text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#5E7261] font-light">
+            Boutique Spa & Centro Estetico
+          </span>
+        </a>
+
+        <!-- Destra: Link Rapidi Desktop (Home, Offerte, Trattamenti, Orari) -->
+        <nav id="desktop-nav-links" class="hidden md:flex items-center space-x-8" aria-label="Navigazione Principale">
+          <!-- Popolato dinamicamente da data.js -->
+        </nav>
+
+        <!-- Tasto finale: Pulsante CTA rapido "Prenota / Contatta" (Terracotta) -->
+        <div class="flex items-center gap-3">
+          <a id="nav-cta-btn" 
+             href="#" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-[#C26747] hover:bg-[#A85437] text-white transition-all duration-300 shadow-sm hover:shadow">
+            <span class="nav-cta-label">Prenota / Contatta</span>
+            <svg class="w-3.5 h-3.5 fill-current text-white" viewBox="0 0 24 24">
+              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.78 14.07c-.24.67-1.39 1.28-1.92 1.36-.5.08-1.14.12-3.69-.93-3.26-1.35-5.36-4.66-5.52-4.88-.16-.22-1.33-1.77-1.33-3.37 0-1.6 1.05-2.39 1.42-2.71.37-.32.81-.4 1.08-.4.27 0 .54.01.78.02.25.02.58-.09.91.7.34.82 1.17 2.85 1.27 3.06.1.21.17.46.03.73-.13.27-.2.43-.4.66-.2.23-.42.51-.6.69-.2.2-.41.42-.18.82.23.4 1.03 1.7 2.21 2.75 1.52 1.35 2.8 1.77 3.2 1.97.4.2.64.17.88-.1.24-.28 1.02-1.19 1.29-1.6.27-.41.54-.34.91-.2.37.14 2.36 1.11 2.76 1.31.4.2.67.3.77.47.1.17.1.98-.14 1.65z"/>
+            </svg>
+          </a>
+
+          <!-- Hamburger Button per smartphone -->
+          <button id="mobile-menu-btn" 
+                  type="button" 
+                  class="md:hidden p-2.5 rounded-xl border border-[#CBD8CC] text-[#273629] hover:bg-[#FAF4F0] focus:outline-none focus:ring-2 focus:ring-[#C26747]/50" 
+                  aria-label="Apri menu principale">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu (Off-Canvas con Safe Area) -->
+  <div id="mobile-menu-backdrop" class="fixed inset-0 z-50 bg-[#273629]/50 backdrop-blur-sm hidden transition-opacity"></div>
+  <aside id="mobile-menu-drawer" 
+         class="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] z-50 bg-[#F7EFEA] shadow-2xl flex flex-col justify-between p-6 transform translate-x-full transition-transform duration-300 ease-in-out"
+         style="padding-top: max(1.5rem, env(safe-area-inset-top)); padding-bottom: max(1.5rem, env(safe-area-inset-bottom));">
+    <div>
+      <div class="flex items-center justify-between pb-5 border-b border-[#E8DDD7]">
+        <div class="flex flex-col">
+          <span class="nav-brand-name font-serif text-2xl font-bold text-[#273629]">Aura</span>
+          <span class="nav-brand-tagline text-[10px] uppercase tracking-wider text-[#5E7261] font-light">Boutique Spa</span>
+        </div>
+        <button id="mobile-menu-close-btn" class="p-2 rounded-lg text-[#273629] hover:bg-[#FAF4F0]" aria-label="Chiudi menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Link lista mobile -->
+      <nav id="mobile-nav-links" class="flex flex-col space-y-2 mt-6">
+        <!-- Popolato dinamicamente da data.js -->
+      </nav>
+    </div>
+
+    <!-- Contatti veloci in fondo al menu mobile -->
+    <div class="pt-6 border-t border-[#E8DDD7]">
+      <p class="text-xs text-[#5E7261] uppercase tracking-wider mb-2 font-medium">Desideri un appuntamento?</p>
+      <a href="#orari" class="mobile-nav-link text-sm font-semibold text-[#C26747] block py-1">
+        Vedi orari e posizione →
+      </a>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       2. SEZIONE HERO (INDIPENDENTE, ALTEZZA 100VH)
+       Sfondo img/hero.jpg con blur e overlay scuro/trasparente ad alta leggibilità.
+       Pulsanti: Riga 1 WhatsApp (Grande) | Riga 2 Social affiancati (Instagram & Facebook)
+       ======================================================================== -->
+  <main class="flex-grow">
+    <section id="hero" class="hero-section text-white relative">
+      
+      <!-- Sfondo Hero Indipendente con Immagine img/hero.jpg, Blur e Overlay Scuro/Trasparente -->
+      <div class="hero-bg-container" aria-hidden="true">
+        <div class="hero-bg-image"></div>
+        <div class="hero-overlay"></div>
+      </div>
+
+      <!-- Contenuti Centrati con Respiro Visivo -->
+      <div class="max-w-7xl mx-auto px-6 sm:px-8 relative z-10 py-24 sm:py-32 w-full flex flex-col items-center justify-center text-center">
+        <div class="max-w-3xl mx-auto">
+          
+          <!-- Badge Superiore Elegante -->
+          <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-white/15 border border-white/25 text-[#FAF4F0] text-xs sm:text-sm font-medium mb-8 shadow-sm backdrop-blur-md">
+            <span id="hero-badge">✦ Oasi di Bellezza, Armonia & Rigenerazione</span>
+          </div>
+
+          <!-- Titolo Evocativo ad Alta Leggibilità -->
+          <h1 id="hero-title" class="font-serif text-4xl sm:text-5xl lg:text-6xl font-medium text-white leading-[1.18] sm:leading-[1.12] mb-6 tracking-tight drop-shadow-md">
+            Ritrova il tuo equilibrio naturale in un'atmosfera di puro benessere.
+          </h1>
+
+          <!-- Sottotitolo Emozionale in Cipria Chiaro -->
+          <p id="hero-subtitle" class="text-base sm:text-lg lg:text-xl text-[#FAF4F0]/90 font-light leading-relaxed mb-12 max-w-2xl mx-auto drop-shadow-sm">
+            Trattamenti personalizzati viso e corpo, cosmeceutica organica d'avanguardia e rituali olistici per rigenerare corpo e spirito nel cuore della città.
+          </p>
+
+          <!-- ================================================================
+               PULSANTI D'AZIONE ORDINATI SU DUE RIGHE DISTINTE
+               ================================================================ -->
+          <div class="flex flex-col items-center justify-center gap-4 mb-14 w-full">
+            
+            <!-- RIGA 1 (Grande/Principale): Pulsante WhatsApp per la prenotazione rapida -->
+            <div class="w-full sm:w-auto">
+              <a id="hero-cta-primary" 
+                 href="#" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 sm:px-10 sm:py-4.5 rounded-2xl bg-[#C26747] hover:bg-[#A85437] text-white font-semibold text-base sm:text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5">
+                <svg class="w-6 h-6 fill-current text-white flex-shrink-0" viewBox="0 0 24 24">
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.78 14.07c-.24.67-1.39 1.28-1.92 1.36-.5.08-1.14.12-3.69-.93-3.26-1.35-5.36-4.66-5.52-4.88-.16-.22-1.33-1.77-1.33-3.37 0-1.6 1.05-2.39 1.42-2.71.37-.32.81-.4 1.08-.4.27 0 .54.01.78.02.25.02.58-.09.91.7.34.82 1.17 2.85 1.27 3.06.1.21.17.46.03.73-.13.27-.2.43-.4.66-.2.23-.42.51-.6.69-.2.2-.41.42-.18.82.23.4 1.03 1.7 2.21 2.75 1.52 1.35 2.8 1.77 3.2 1.97.4.2.64.17.88-.1.24-.28 1.02-1.19 1.29-1.6.27-.41.54-.34.91-.2.37.14 2.36 1.11 2.76 1.31.4.2.67.3.77.47.1.17.1.98-.14 1.65z"/>
+                </svg>
+                <span class="cta-text">Prenota subito su WhatsApp</span>
+              </a>
+            </div>
+
+            <!-- RIGA 2 (Sotto, più raffinati e compatti): Due bottoni affiancati con etichette esatte -->
+            <div id="hero-social-row" class="w-full sm:w-auto flex flex-col sm:flex-row items-center justify-center gap-3">
+              <!-- Popolato dinamicamente da data.js con:
+                   - "Esplora i nostri lavori su Instagram"
+                   - "Segui la pagina Facebook" -->
+            </div>
+
+          </div>
+
+          <!-- Indicatori di Fiducia (Trust Indicators centrati) -->
+          <div id="hero-trust-metrics" class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-2xl mx-auto">
+            <!-- Popolato dinamicamente da data.js -->
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         3. BLOCCO UNIFICATO A SFONDO CONDIVISO (SEZIONI 2, 3 E 4)
+         Sfondo continuo img/sfondo.jpg (fissa e immobile con elementi scorrevoli sopra)
+         Racchiude:
+         - Sottosezione 2: Offerte e Pacchetti del Mese (#offerte)
+         - Sottosezione 3: Tutti i Trattamenti con filtri (#trattamenti)
+         - Sottosezione 4: Luogo, Orari e Contatti (#orari)
+         Spaziatura generosa (py-28 sm:py-36) e centratura (max-w-7xl mx-auto px-6 sm:px-8)
+         ======================================================================== -->
+    <div id="unified-content-block" class="relative">
+      
+      <!-- Sfondo Fisso Immobile con Sfocatura e Trasparenza Cipria -->
+      <div class="unified-bg-fixed" aria-hidden="true">
+        <div class="unified-bg-image"></div>
+        <div class="unified-bg-overlay"></div>
+      </div>
+
+      <div class="relative z-10">
+        
+        <!-- SOTTOSEZIONE 2: OFFERTE E PACCHETTI DEL MESE (#offerte) -->
+        <section id="offerte" class="py-28 sm:py-36 border-b border-[#CBD8CC]/60">
+          <div class="max-w-7xl mx-auto px-6 sm:px-8">
+            
+            <div class="max-w-3xl mx-auto text-center mb-16">
+              <span id="offers-badge" class="inline-block text-xs uppercase tracking-widest font-semibold text-[#C26747] mb-2">
+                ✦ Promozione Esclusiva del Mese
+              </span>
+              <h2 id="offers-title" class="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#273629] mt-2 mb-4 leading-tight">
+                Offerte e Pacchetti del Mese
+              </h2>
+              <p id="offers-subtitle" class="text-sm sm:text-base text-[#5E7261] font-light leading-relaxed max-w-xl mx-auto">
+                Percorsi completi studiati per offrirti la massima efficacia a una tariffa speciale.
+              </p>
+            </div>
+
+            <!-- Griglia Card Offerte Centrate (2 colonne) -->
+            <div id="offers-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 max-w-5xl mx-auto">
+              <!-- Popolato dinamicamente da data.js -->
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SOTTOSEZIONE 3: TUTTI I TRATTAMENTI CON FILTRI (#trattamenti) -->
+        <section id="trattamenti" class="py-28 sm:py-36 border-b border-[#CBD8CC]/60">
+          <div class="max-w-7xl mx-auto px-6 sm:px-8">
+            
+            <div class="max-w-3xl mx-auto text-center mb-14">
+              <span id="services-badge" class="inline-block text-xs uppercase tracking-widest font-semibold text-[#C26747] mb-2">
+                Menu Benessere & Cura della Pelle
+              </span>
+              <h2 id="services-title" class="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#273629] mt-2 mb-4 leading-tight">
+                Tutti i Trattamenti
+              </h2>
+              <p id="services-subtitle" class="text-sm sm:text-base text-[#5E7261] font-light leading-relaxed max-w-xl mx-auto">
+                Protocolli personalizzati e cosmeceutica naturale ad alta efficacia per valorizzare la tua bellezza naturale.
+              </p>
+            </div>
+
+            <!-- Filtri Interattivi Categorie (Pill Tabs Centrate) -->
+            <div id="services-category-tabs" class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-16" role="tablist">
+              <!-- Popolato dinamicamente da data.js -->
+            </div>
+
+            <!-- Griglia Servizi Trattamenti Centrata -->
+            <div id="services-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              <!-- Popolato dinamicamente da data.js -->
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SOTTOSEZIONE 4: LUOGO, ORARI E CONTATTI (#orari) -->
+        <section id="orari" class="py-28 sm:py-36">
+          <div class="max-w-7xl mx-auto px-6 sm:px-8">
+            
+            <div class="max-w-3xl mx-auto text-center mb-16">
+              <span id="location-badge" class="inline-block text-xs uppercase tracking-widest font-semibold text-[#C26747] mb-2">
+                Dove Siamo & Quando Trovarci
+              </span>
+              <h2 id="location-title" class="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#273629] mt-2 mb-4 leading-tight">
+                Luogo, Orari e Contatti
+              </h2>
+              <p id="location-subtitle" class="text-sm sm:text-base text-[#5E7261] font-light leading-relaxed max-w-xl mx-auto">
+                Un ambiente riservato e accogliente nel cuore della città. Prenota in anticipo per garantirti la cabina desiderata.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+              
+              <!-- Colonna Sinistra: Orari Dettagliati & Recapiti (5/12) -->
+              <div class="lg:col-span-5 bg-white p-7 sm:p-9 rounded-3xl border border-[#CBD8CC] shadow-sm flex flex-col justify-between space-y-6">
+                
+                <!-- Orari di Apertura -->
+                <div>
+                  <h3 class="text-lg font-serif font-bold text-[#273629] mb-4 flex items-center gap-2 pb-2 border-b border-[#E8DDD7]">
+                    <svg class="w-5 h-5 text-[#C26747]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Orari di Apertura
+                  </h3>
+                  <ul id="footer-hours-list" class="space-y-1">
+                    <!-- Popolato dinamicamente da data.js -->
+                  </ul>
+                </div>
+
+                <!-- Recapiti Diretti -->
+                <div class="pt-4 border-t border-[#E8DDD7] space-y-3">
+                  <h3 class="text-lg font-serif font-bold text-[#273629] mb-3 flex items-center gap-2 pb-2 border-b border-[#E8DDD7]">
+                    <svg class="w-5 h-5 text-[#C26747]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+                    </svg>
+                    Sede & Contatti
+                  </h3>
+
+                  <p class="text-xs sm:text-sm text-[#273629] flex items-start gap-2">
+                    <span class="font-semibold min-w-[70px] text-[#5E7261]">Indirizzo:</span>
+                    <a id="footer-address" href="#" target="_blank" rel="noopener noreferrer" class="hover:text-[#C26747] underline decoration-[#CBD8CC] transition-colors font-medium">
+                      <!-- Popolato da data.js -->
+                    </a>
+                  </p>
+
+                  <p id="footer-zone-note" class="text-xs text-[#5E7261] italic bg-[#FAF4F0] p-3 rounded-xl border border-[#E8DDD7]">
+                    <!-- Popolato da data.js -->
+                  </p>
+
+                  <p class="text-xs sm:text-sm text-[#273629] flex items-center gap-2">
+                    <span class="font-semibold min-w-[70px] text-[#5E7261]">Telefono:</span>
+                    <a id="footer-phone" href="#" class="hover:text-[#C26747] font-semibold transition-colors">
+                      <!-- Popolato da data.js -->
+                    </a>
+                  </p>
+
+                  <p class="text-xs sm:text-sm text-[#273629] flex items-center gap-2">
+                    <span class="font-semibold min-w-[70px] text-[#5E7261]">Email:</span>
+                    <a id="footer-email" href="#" class="hover:text-[#C26747] transition-colors">
+                      <!-- Popolato da data.js -->
+                    </a>
+                  </p>
+
+                  <p class="text-xs sm:text-sm text-[#273629] flex items-center gap-2">
+                    <span class="font-semibold min-w-[70px] text-[#5E7261]">PEC:</span>
+                    <a id="footer-pec" href="#" class="hover:text-[#C26747] transition-colors">
+                      <!-- Popolato da data.js -->
+                    </a>
+                  </p>
+                </div>
+
+              </div>
+
+              <!-- Colonna Destra: Box Mappa Google Maps Incorporata (7/12) -->
+              <div class="lg:col-span-7 bg-white p-3 rounded-3xl border border-[#CBD8CC] shadow-sm overflow-hidden min-h-[380px] sm:min-h-[460px]">
+                <iframe 
+                  id="footer-map-iframe"
+                  src="" 
+                  width="100%" 
+                  height="100%" 
+                  style="border:0; border-radius: 1.25rem; min-height: 380px;" 
+                  allowfullscreen="" 
+                  loading="lazy" 
+                  referrerpolicy="no-referrer-when-downgrade"
+                  title="Posizione Geografica Centro Estetico su Mappa">
+                </iframe>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       4. FOOTER PROFESSIONALE (DATI REALI A NORMA DI LEGGE ITALIANA)
+       Ragione Sociale, Partita IVA, Registro Imprese, REA, Note Legali
+       ======================================================================== -->
+  <footer class="bg-[#1C261D] text-[#F7EFEA] pt-16 pb-8 border-t border-[#273629] relative z-10">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+      
+      <!-- Sezione Superiore: Brand & Social -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-white/10 items-start">
+        <div class="md:col-span-8">
+          <span class="nav-brand-name font-serif text-3xl font-semibold tracking-wider text-white">Aura</span>
+          <p id="footer-about" class="text-xs sm:text-sm text-[#F7EFEA]/80 max-w-xl mt-3 font-light leading-relaxed">
+            <!-- Popolato dinamicamente da data.js -->
+          </p>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="md:col-span-4 flex md:justify-end items-center space-x-3 pt-2">
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/10 hover:bg-[#C26747] text-white flex items-center justify-center transition-colors" aria-label="Seguici su Instagram">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/10 hover:bg-[#C26747] text-white flex items-center justify-center transition-colors" aria-label="Seguici su Facebook">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.456 5 15.658 5H18V0h-3.808C10.595 0 9 1.583 9 4.615V8z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Dati Fiscali e Notizie Legali Italiane (Negozio Reale) -->
+      <div id="footer-company-legal" class="py-6 border-b border-white/10">
+        <!-- Popolato dinamicamente da data.js -->
+      </div>
+
+      <!-- Note Deontologiche, GDPR e Privacy -->
+      <div class="py-4 border-b border-white/10">
+        <p id="footer-legal-note" class="text-[11px] text-[#F7EFEA]/65 font-light leading-relaxed">
+          <!-- Popolato dinamicamente da data.js -->
+        </p>
+      </div>
+
+      <!-- Copyright e Ritorno in Cima -->
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-[#F7EFEA]/65 gap-4">
+        <p id="footer-copyright">
+          <!-- Popolato dinamicamente da data.js -->
+        </p>
+        <a href="#hero" class="hover:text-[#C26747] transition-colors flex items-center gap-1 font-medium">
+          <span>Torna su</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       5. FLOATING WHATSAPP BUTTON (CON SAFE-AREA E ACCENTO TERRACOTTA)
+       ======================================================================== -->
+  <div class="floating-whatsapp group flex items-center">
+    <!-- Tooltip desktop discreto -->
+    <span id="floating-whatsapp-tooltip" 
+          class="hidden sm:inline-block mr-3 px-3.5 py-1.5 rounded-full bg-[#1C261D] text-white text-xs font-light shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap border border-[#C26747]/50">
+      Prenota su WhatsApp
+    </span>
+
+    <a id="floating-whatsapp-btn" 
+       href="#" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="relative w-14 h-14 rounded-full bg-[#C26747] text-white flex items-center justify-center shadow-lg hover:shadow-2xl transition-transform"
+       aria-label="Contattaci su WhatsApp per informazioni o prenotazioni">
+      
+      <!-- Anello di pulse delicato Terracotta -->
+      <span class="whatsapp-pulse-ring"></span>
+
+      <!-- Icona WhatsApp -->
+      <svg class="w-7 h-7 fill-current relative z-10 text-white" viewBox="0 0 24 24">
+        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.78 14.07c-.24.67-1.39 1.28-1.92 1.36-.5.08-1.14.12-3.69-.93-3.26-1.35-5.36-4.66-5.52-4.88-.16-.22-1.33-1.77-1.33-3.37 0-1.6 1.05-2.39 1.42-2.71.37-.32.81-.4 1.08-.4.27 0 .54.01.78.02.25.02.58-.09.91.7.34.82 1.17 2.85 1.27 3.06.1.21.17.46.03.73-.13.27-.2.43-.4.66-.2.23-.42.51-.6.69-.2.2-.41.42-.18.82.23.4 1.03 1.7 2.21 2.75 1.52 1.35 2.8 1.77 3.2 1.97.4.2.64.17.88-.1.24-.28 1.02-1.19 1.29-1.6.27-.41.54-.34.91-.2.37.14 2.36 1.11 2.76 1.31.4.2.67.3.77.47.1.17.1.98-.14 1.65z"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Script Centrale Dati e Idratazione (DRY) -->
+  <script src="data.js"></script>
+</body>
+</html>

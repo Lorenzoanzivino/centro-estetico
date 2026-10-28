@@ -1,0 +1,247 @@
+/* ==========================================================================
+   STYLE.CSS - CENTRO ESTETICO DI LUSSO "AURA"
+   Palette Rigida (Regola 60-30-10):
+   - 60% Colore Base: Rosa Carne / Cipria Polveroso (#F7EFEA)
+   - 30% Colore Secondario: Verde Bosco / Verde Oliva profondo (#344636 / #4E6151)
+   - 10% Colore Accento: Terracotta caldo marroncino-arancione (#C26747)
+   ========================================================================== */
+
+/* 1. VARIABILI CSS E SAFE AREA PER SMARTPHONE */
+:root {
+  --color-cipria-base: #F7EFEA;     /* 60% Base / Sfondo neutro leggero */
+  --color-cipria-surface: #FAF4F0;  /* Cipria chiarissimo per contrasto morbido */
+  --color-cipria-border: #E8DDD7;   /* Bordo cipria delicato */
+
+  --color-bosco-dark: #273629;      /* 30% Verde Bosco scurissimo per testi e titoli a contrasto elevato */
+  --color-bosco: #344636;           /* Verde Bosco primario */
+  --color-bosco-light: #4E6151;     /* Verde Oliva profondo */
+  --color-bosco-muted: #5E7261;     /* Testo secondario */
+  --color-bosco-border: #CBD8CC;    /* Bordi verdi delicati */
+  --color-bosco-tint: #EBF1EC;      /* Superficie verde tenue per badge */
+
+  --color-terracotta: #C26747;      /* 10% Accento Terracotta caldo marroncino-arancione */
+  --color-terracotta-hover: #A85437;/* Terracotta scuro per hover */
+  --color-terracotta-dark: #8E4229;
+  --color-terracotta-tint: #F9ECE7; /* Terracotta chiarissimo per badge */
+
+  /* Safe Area Insets per iOS & Android con gesture bar / notch */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+/* 2. BASE & TIPOGRAFIA */
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-cipria-base);
+  color: var(--color-bosco-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  background-color: var(--color-cipria-base);
+}
+
+h1, h2, h3, h4, .font-serif-luxury {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  letter-spacing: -0.015em;
+}
+
+/* 3. GESTIONE SFONDO HERO (INDIPENDENTE, 100vh, CON OVERLAY E BLUR) */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-bg-image {
+  position: absolute;
+  inset: -25px;
+  background-image: url('img/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(6px);
+  transform: scale(1.06);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg, 
+    rgba(22, 17, 14, 0.72) 0%, 
+    rgba(27, 21, 18, 0.62) 50%, 
+    rgba(22, 17, 14, 0.80) 100%
+  );
+  backdrop-filter: brightness(0.92);
+}
+
+/* 4. BLOCCO UNIFICATO A SFONDO CONDIVISO (SEZIONI 2, 3 E 4) */
+/* L'immagine img/sfondo.jpg rimane fissa e immobile mentre gli elementi scorrono sopra */
+.unified-bg-fixed {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.unified-bg-image {
+  position: fixed;
+  inset: -25px;
+  background-image: url('img/sfondo.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  opacity: 0.16;
+  transform: scale(1.05);
+}
+
+.unified-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(247, 239, 234, 0.90); /* Tinta cipria polveroso per garantire contrasto e leggibilità */
+}
+
+/* 5. BOTTONI SOCIAL HERO (RIGA 2) */
+.hero-social-btn {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(10px);
+  color: #FAF4F0;
+}
+
+.hero-social-btn:hover {
+  background: rgba(255, 255, 255, 0.26);
+  border-color: rgba(255, 255, 255, 0.65);
+  transform: translateY(-2px);
+  color: #FFFFFF;
+}
+
+/* 6. TAB CATEGORIE TRATTAMENTI */
+.category-tab {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.category-tab.active {
+  background-color: var(--color-bosco);
+  color: #FFFFFF;
+  border-color: var(--color-bosco);
+  box-shadow: 0 4px 14px -2px rgba(52, 70, 54, 0.25);
+}
+
+/* 7. MICRO-INTERAZIONI CARD DI LUSSO */
+.card-luxury {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card-luxury:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px -8px rgba(39, 54, 41, 0.08);
+  border-color: rgba(194, 103, 71, 0.6);
+}
+
+/* Badge Terracotta per offerte speciali */
+.badge-terracotta {
+  background: linear-gradient(135deg, #C26747 0%, #B25838 100%);
+  color: #FFFFFF;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.18);
+}
+
+/* 8. SAFE AREA E FLOATING WHATSAPP BUTTON */
+.floating-whatsapp {
+  position: fixed;
+  z-index: 999;
+  bottom: calc(1.5rem + var(--safe-bottom));
+  right: calc(1.25rem + var(--safe-right));
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.floating-whatsapp:hover {
+  transform: translateY(-4px) scale(1.05);
+}
+
+.floating-whatsapp:active {
+  transform: translateY(0) scale(0.96);
+}
+
+/* Pulse delicato attorno al pulsante WhatsApp */
+.whatsapp-pulse-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  border: 2px solid rgba(194, 103, 71, 0.55);
+  animation: terracottaPulse 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes terracottaPulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.22);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(1.32);
+    opacity: 0;
+  }
+}
+
+/* 9. SCROLLBAR ELEGANTE STILE SPA */
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #EFE3DC;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C4B5AC;
+  border-radius: 6px;
+  border: 2px solid #EFE3DC;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C26747;
+}
+
+/* 10. ANIMAZIONE FADE-IN */
+.fade-in-item {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
